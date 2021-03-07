@@ -1,0 +1,17 @@
+<h1>顧客詳細画面</h1>
+  <table>
+    <tbody>
+      <tr>
+        <td><%= @customer.last_name %></td>
+        <td><%= @customer.first_name %></td>
+        <td><%= @customer.last_name_kana %></td>
+        <td><%= @customer.first_name_kana %></td>
+        <td><%= @customer.email %></td>
+        <td><%= @customer.encrypted_password %></td>
+        <td><%= @customer.postal_code %></td>
+        <td><%= @customer.address %></td>
+        <td><%= @customer.telephone_number %></td>
+        <td><%= link_to "編集", edit_admin_customer_path(@customer) %></td>
+      </tr>
+    </tbody>
+  </table>

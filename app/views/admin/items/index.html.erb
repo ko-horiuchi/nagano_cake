@@ -1,0 +1,28 @@
+<%= render 'admin/admin_header' %>
+
+<h1>商品一覧ページ（管理者用）</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>商品説明</th>
+        <th>税抜き価格</th>
+        <th>商品画像</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+      
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td>
+            <%= link_to admin_item_path(item.id) do %>
+            <%= item.name %>
+            <% end %>
+          </td>
+          <td><%= item.introduction %></td>
+          <td><%= item.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

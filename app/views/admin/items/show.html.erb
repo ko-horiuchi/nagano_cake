@@ -1,0 +1,12 @@
+<h1>商品詳細ページ</h1>
+  <table>
+    <tbody>
+      <tr>
+        <td><%= @item.name %></td>
+        <td><%= @item.introduction %></td>
+        <td><%= @item.price %></td>
+        <td><%= link_to "編集", edit_admin_item_path(@item) %></td>
+      </tr>
+    </tbody>
+  </table>
+  
