@@ -1,6 +1,8 @@
 <%= render 'public/public_header' %>
 
 <h1>商品詳細</h1>
+  <%= form_with model: @cart_item ,url: cart_items_path, local:true  do |f| %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
   <table>
     <thead>
       <tr>
@@ -13,15 +15,14 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @item.name %></td>
-        <td><%= @item.introduction %></td>
-        <td><%= @item.price %></td>
-        <%= form_with model: @item do |f| %>
-          <td><%= f.select :cart_items, [["1", "1"], ["2", "2"],["3", "3"],["4", "4"],["5", "5"],["6", "3"]], include_blank: "数量" %></td>
-          <td><%= f.submit 'カートに追加'%></td>
-        <% end %>
+          <td><%= @item.name %></td>
+          <td><%= @item.introduction %></td>
+          <td><%= @item.price %></td>
+          <td><%= f.number_field :amount, min: 1, max: 100, include_blank: "個数選択" %></td>
+          <td><%= f.submit 'カートに入れる'%></td>
       </tr>
     </tbody>
   </table>
+  <% end %>
 
     <p><%= link_to "商品一覧に戻る", items_path %></p>

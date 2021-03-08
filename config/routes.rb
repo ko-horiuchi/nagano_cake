@@ -28,3 +28,9 @@ Rails.application.routes.draw do
    resources :addresses, only:[:index, :edit, :create, :update, :destroy]
   end
  end
+ 
+#  resources :cart_items do
+#   collection do
+#     delete 'destroy_all'
+#   end
+# end
