@@ -1,3 +1,5 @@
+<%= render 'public/public_header' %>
+
 <h1>商品一覧</h1>
   <table>
     <thead>
@@ -9,12 +11,12 @@
         <th colspan="3"></th>
       </tr>
     </thead>
-      
+
     <tbody>
       <% @items.each do |item| %>
         <tr>
           <td>
-            <%= link_to public_item_path(item.id) do %>
+            <%= link_to item_path(item.id) do %>
             <%= item.name %>
             <% end %>
           </td>

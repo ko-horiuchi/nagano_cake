@@ -1,3 +1,5 @@
+<%= render 'public/public_header' %>
+
 <h1>商品詳細</h1>
   <table>
     <thead>
@@ -14,8 +16,12 @@
         <td><%= @item.name %></td>
         <td><%= @item.introduction %></td>
         <td><%= @item.price %></td>
-        <td>カートに追加する？</td>
-        <td>数量選択</td>
+        <%= form_with model: @item do |f| %>
+          <td><%= f.select :cart_items, [["1", "1"], ["2", "2"],["3", "3"],["4", "4"],["5", "5"],["6", "3"]], include_blank: "数量" %></td>
+          <td><%= f.submit 'カートに追加'%></td>
+        <% end %>
       </tr>
     </tbody>
   </table>
+
+    <p><%= link_to "商品一覧に戻る", items_path %></p>

@@ -1,1 +1,15 @@
 <h1>登録住所編集</h1>
+
+<h1>配送先編集</h1>
+  <%= form_with model: @addresses, url: public_address_path, local:true do |f| %>
+    <label for="name">宛名</label></br>
+    <%= f.text_field :name %></br>
+    <label for="postal_code">〒</label></br>
+    <%= f.text_field :postal_code %></br>
+    <label for="address">住所</label></br>
+    <%= f.text_field :address %></br>
+    <%= f.submit '登録' %>
+  <% end %>
+
+
+  <p><%= link_to "配送先一覧に戻る", public_addresses_path %></p>
