@@ -1,15 +1,14 @@
 <%= render 'admin/admin_header' %>
 
-<h1>管理者TOPページ（注文一覧）</h1>
+<h3>注文履歴一覧</h3>
   <table>
     <thead>
       <tr>
         <th></th>
+        <th>購入日時</th>
         <th>購入者</th>
-        <th>購入日</th>
-        <th>購入内容</th>
-        <th>請求額合計</th>
-        <th>配送先</th>
+        <th>注文個数</th>
+        <th>注文ステータス</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -17,15 +16,11 @@
     <tbody>
       <% @orders.each do |order| %>
         <tr>
-          <td><%= order.name %></td>
-          <td><%= order.postal_code %></td>
-          <td><%= order.address %></td>
-          <td><%= order.shipping_cost %></td>
-          <td><%= order.total_payment %></td>
-          <td><%= order.payment_method %></td>
+          <td><%= order.created_at %></td>
+          <td><%= order.customer.name %></td>
+          <td><%= order.cart_item.amount %></td>
+          <td><%= order.order.status %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
-  <%= link_to "logout", destroy_admin_session_path, method: :delete %>
