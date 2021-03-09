@@ -1,12 +1,11 @@
 <h3>商品新規登録</h3>
   <%= form_with model: @item, url: admin_items_path, local:true do |f| %>
-    <label>商品画像</label>
+    <label for="image_id">商品画像</label>
     <%= f.attachment_field :image %></br>
     <label for="name">商品名</label>
     <%= f.text_field :name,placeholder: "商品名" %></br>
     <label for="introduction">商品説明</label>
     <%= f.text_area :introduction,placeholder: "ここに説明文を記述します" %></br>
-     <label for="price">ジャンル</label></br>
     <label for="price">税抜き価格</label>
     <%= f.text_field :price %>円</br>
     <label>販売ステータス</label></br></br>

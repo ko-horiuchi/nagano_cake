@@ -1,17 +1,31 @@
-<h1>顧客詳細画面</h1>
+<%= render 'admin/admin_header' %>
+
+<h3><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h3>
   <table>
-    <tbody>
+    <thead>
       <tr>
-        <td><%= @customer.last_name %></td>
-        <td><%= @customer.first_name %></td>
-        <td><%= @customer.last_name_kana %></td>
-        <td><%= @customer.first_name_kana %></td>
-        <td><%= @customer.email %></td>
-        <td><%= @customer.encrypted_password %></td>
-        <td><%= @customer.postal_code %></td>
-        <td><%= @customer.address %></td>
-        <td><%= @customer.telephone_number %></td>
-        <td><%= link_to "編集", edit_admin_customer_path(@customer) %></td>
+        <th>会員ID</th>
+        <th>氏名</th>
+        <th>フリガナ</th>
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>電話番号</th>
+        <th>メールアドレス</th>
+        <th>会員ステータス</th>
+        <th colspan="3"></th>
       </tr>
+    </thead>
+
+    <tbody>
+      <td><%= @customer.id %></td>
+      <td><%= @customer.last_name %><%= @customer.first_name %></td>
+      <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+      <td><%= @customer.postal_code %></td>
+      <td><%= @customer.address %></td>
+      <td><%= @customer.telephone_number %></td>
+      <td><%= @customer.email %></td>
     </tbody>
   </table>
+
+  <%= link_to "編集する", edit_admin_customer_path(@customer) %>
+  <%= link_to "注文履歴一覧を見る", edit_admin_customer_path(@customer) %>

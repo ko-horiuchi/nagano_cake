@@ -1,6 +1,8 @@
 <%= render 'admin/admin_header' %>
 
 <h3>商品一覧ページ</h3>
+<%= link_to '＋', new_admin_item_path %>
+
   <table>
     <thead>
       <tr>
@@ -22,9 +24,7 @@
             <%= item.name %>
             <% end %>
           </td>
-  
           <td><%= item.price %></td>
-
         </tr>
       <% end %>
     </tbody>
