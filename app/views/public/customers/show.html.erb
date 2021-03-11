@@ -1,19 +1,17 @@
-<%= render 'admin/admin_header' %>
+<%= render 'public/public_header' %>
 
-<h3><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h3>
+<h2>マイページ</h2>
+<h3>登録情報</h3>
+<%= link_to "編集する", edit_customer_path(@customer) %>
 
 <table>
   <tbody>
-    <tr>
-      <td>会員ID</td>
-      <td><%= @customer.id %></td>
-    </tr>
     <tr>
       <td>氏名</td>
       <td><%= @customer.last_name %><%= @customer.first_name %></td>
     </tr>
     <tr>
-      <td>フリガナ</td>
+      <td>カナ</td>
       <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
     </tr>
     <tr>
@@ -32,12 +30,9 @@
       <td>メールアドレス</td>
       <td><%= @customer.email %></td>
     </tr>
-    <tr>
-      <td>会員ステータス</td>
-      <td><%= @customer.email %></td>
-    </tr>
   </tbody>
 </table>
 
-<%= link_to "編集する", edit_admin_customer_path(@customer) %>
-<%= link_to "注文履歴一覧を見る", edit_admin_customer_path(@customer) %>
+<div>配送先<%= link_to "一覧を見る", customer_path(@customer) %></div>
+<div>注文履歴<%= link_to "一覧を見る", customer_path(@customer) %></div>
+

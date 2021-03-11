@@ -24,12 +24,24 @@ class Customers::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-    private
-   def after_sign_in_path_for(resource)
-    items_path
-   end
+  private
+    def after_sign_in_path_for(resource)
+      items_path
+    end
 
-   def after_sign_out_path_for(resource)
-    root_path
-   end
+    def after_sign_out_path_for(resource)
+      root_path
+    end
+    
+  # before_action :reject_inactive_customer, only: [:create]
+   
+  # protected
+  #   def reject_inactive_customer
+  #     @customer = Customer.find_by(name: params[:customer][:name])
+  #     if @customer
+  #       if @customer.valid_password?(params[:customer][:password]) && !@customer.is_valid
+  #         redirect_to new_customer_session_path
+  #       end
+  #     end
+  #   end
 end

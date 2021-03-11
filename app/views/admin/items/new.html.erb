@@ -1,4 +1,7 @@
+<%= render 'admin/admin_header' %>
+
 <h3>商品新規登録</h3>
+
   <%= form_with model: @item, url: admin_items_path, local:true do |f| %>
     <label for="image_id">商品画像</label>
     <%= f.attachment_field :image %></br>

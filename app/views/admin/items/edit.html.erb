@@ -1,13 +1,16 @@
-<h1>商品編集ページ</h1>
+<%= render 'admin/admin_header' %>
+
+<h2>商品編集</h2>
   <%= form_with model: @item, url: admin_item_path, local:true do |f| %>
-    <label for="name">商品名</label></br>
+    <label for="image_id">商品画像</label>
+    <%= f.attachment_field :image %></br>
+    <label for="name">商品名</label>
     <%= f.text_field :name %></br>
-    <label for="introduction">商品説明</label></br>
+    <label for="introduction">商品説明</label>
     <%= f.text_area :introduction %></br>
-    <label for="price">税抜き価格</label></br>
+    <label for="price">税抜き価格</label>
     <%= f.text_field :price %></br>
-    <label>商品画像</label></br></br>
-    <%= f.submit '商品編集' %>
+    <label>販売ステータス</label></br></br>
+    <%= f.submit '変更を保存' %>
   <% end %>
-  
-    <p><%= link_to "詳細画面に戻る", admin_item_path %>|<%= link_to "商品一覧に戻る", admin_items_path %></p>
+
