@@ -1,17 +1,17 @@
 <%= render 'public/public_header' %>
 
-<h1>商品一覧</h1>
+<div><strong><font size = "6">商品一覧</font></strong>全<%= Item.count %>件</div>
 
     <tbody>
       <% @items.each do |item| %>
         <tr>
-          <tb><%= attachment_image_tag item, :image, :fill, 300, 300, format: 'jpeg' %></tb>
+          <tb><%= attachment_image_tag item, :image, :fill, 200, 200, format: 'jpeg' %></tb>
           <td>
             <%= link_to item_path(item.id) do %>
             <%= item.name %>
             <% end %>
           </td>
-          <td><%= item.price %></td>
+          <td>¥<%= item.price.to_s(:delimited) %></td>
         </tr>
       <% end %>
     </tbody>

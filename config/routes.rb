@@ -22,13 +22,16 @@ Rails.application.routes.draw do
    get root to: "homes#top"
    get "homes/about" => "homes#about"
    resources :customers, only:[:show, :edit, :update]
-   get 'unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
-   patch ':id/withdraw/' => 'customers#withdraw', as: 'withdraw'
-   put 'withdraw' => 'customers#withdraw'
+   get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'orders/unsubscribe'
+   patch ':id/withdraw/' => 'customers#withdraw', as: 'orders/withdraw'
+   put 'customers/withdraw' => 'customers#withdraw'
    resources :items, only:[:index, :show]
    resources :cart_items, only:[:index, :update, :destroy, :create]
    delete :cart_items, to: 'cart_items#destroy_all'
    resources :addresses, only:[:index, :edit, :create, :update, :destroy]
    delete 'cart_item_destroy_all' => 'cart_items#cart_item_destroy_all',as: 'cart_item_destroy_all'
+   resources :orders, only:[:index, :show, :create, :new]
+   get 'orders/complete' => 'orders#complete', as: 'orders/complete'
+   post 'orders/confirm' => 'orders#confirm', as: 'orders/confirm'
   end
  end

@@ -1,6 +1,6 @@
 <%= render 'admin/admin_header' %>
 
-<h1>会員一覧</h1>
+<h2>会員一覧</h2>
   <table>
     <thead>
       <tr>
@@ -22,7 +22,14 @@
             <% end %>
           </td>
           <td><%= customer.email %></td>
-        </tr>
+          <td><% if customer.is_active == true %>
+                有効
+                <% else %>
+                退会
+              <% end %></td>
+         </tr>
       <% end %>
     </tbody>
   </table>
+  
+  <%= paginate @customers %>
