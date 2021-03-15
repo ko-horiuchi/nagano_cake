@@ -1,0 +1,47 @@
+<%= render 'public/public_header' %>
+
+<h2>注文情報確認</h2>
+
+ <table>
+    <thead>
+      <tr>
+        <td></td>
+        <td>商品名</td>
+        <td>単価(税込)</td>
+        <td>数量</td>
+        <td>小計</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% total_price1 = 0 %>
+      <% subtotal = 00 %>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= attachment_image_tag cart_item.item, :image, :fill, 120, 80, format: 'jpeg' %></td>
+          <td><%= cart_item.item.name %></td>
+          <td><% price = cart_item.item.price * 1.1 %><%= price.round.to_s(:delimited) %></td>
+          <td><%= cart_item.amount %></td>
+          <td><% subtotal = price * cart_item.amount %><%= subtotal.round.to_s(:delimited) %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table>
+    <tr>
+      <td>送料</td><td><%= @order.shipping_cost %></td>
+    </tr>
+    <tr>
+      <td>商品合計</td><td><% total_price2 = total_price1 += subtotal %><%= total_price2.round.to_s(:delimited) %> </td>
+    </tr>
+    <tr>
+      <td>請求金額</td><td><% @order.total_payment = total_price2 + @order.shipping_cost %><%= @order.total_payment.round.to_s(:delimited) %></td>
+    </tr>
+  </table>
+
+  <strong>支払方法</strong><%= @order.payment_method %></br>
+  <strong>お届け先</strong><%= @order.postal_code %><%= @order.address %></br><%= @order.name %>
+
+  <%= link_to '注文を確定する', orders_complete_path %>

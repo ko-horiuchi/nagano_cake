@@ -1,7 +1,7 @@
 <%= render 'public/public_header' %>
 
 <h3>会員情報編集</h3>
-  <%= form_with model:@customer, url:"/customers/#{current_customer.id}", local:true do |f| %>
+  <%= form_with model:@customer, url:customer_path, local:true do |f| %>
     <h6>氏名</h6>
       <%= f.text_field :last_name %><%= f.text_field :first_name %>
     <h6>フリガナ</h6>
@@ -17,4 +17,4 @@
     <%= f.submit '編集内容を保存' %>
   <% end %>
 
-<%= link_to "退会する", unsubscribe_path %>
+<%= link_to "退会する", customers_unsubscribe_path %>

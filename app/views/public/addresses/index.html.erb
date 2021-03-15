@@ -1,10 +1,10 @@
 <%= render 'public/public_header' %>
 
-<h2>新規配送先登録</h2>
-  <%= form_with model: @address, url: public_addresses_path, local:true do |f| %>
-    <label for="name">郵便番号(ハイフンなし)</label></br>
+<h3>新規配送先登録</h3>
+  <%= form_with model: @address, url: addresses_path, local:true do |f| %>
+    <label for="postal_code">郵便番号(ハイフンなし)</label></br>
     <%= f.text_field :postal_code,placeholder: "0000000" %></br>
-    <label for="name">住所</label></br>
+    <label for="address">住所</label></br>
     <%= f.text_field :address,placeholder: "東京都渋谷区代々木神園町０−０" %></br>
     <label for="name">宛名</label></br>
     <%= f.text_field :name,placeholder: "令和道子" %></br>
@@ -27,8 +27,8 @@
           <td><%= address.postal_code %></td>
           <td><%= address.address %></td>
           <td><%= address.name %></td>
-          <td><%= link_to "編集する", edit_public_address_path(@item.id) %></td>
-          <td><%= link_to '削除する', public_addresses_path, method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+          <td><%= link_to "編集する", edit_address_path(address.id) %></td>
+          <td><%= link_to '削除する', address_path(address.id),  method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
         </tr>
       <% end %>
     </tbody>

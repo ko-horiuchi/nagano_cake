@@ -17,10 +17,12 @@
       <% @orders.each do |order| %>
         <tr>
           <td><%= order.created_at %></td>
-          <td><%= order.customer.name %></td>
-          <td><%= order.cart_item.amount %></td>
-          <td><%= order.order.status %></td>
+          <td><%= order.customer.last_name %></td>
+          <td><%#= order.cart_item.amount %></td>
+          <td><%#= order.order.status %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+<%= paginate @orders %>

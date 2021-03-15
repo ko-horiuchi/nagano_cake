@@ -1,7 +1,7 @@
 <%= render 'public/public_header' %>
 
 <h1>配送先編集</h1>
-  <%= form_with model: @addresses, url: public_address_path, local:true do |f| %>
+  <%= form_with model: @address, url: address_path, local:true do |f| %>
     <label for="postal_code">郵便番号(ハイフンなし)</label></br>
     <%= f.text_field :postal_code %></br>
     <label for="address">住所</label></br>
@@ -10,6 +10,3 @@
     <%= f.text_field :name %></br>
     <%= f.submit '変更内容を保存' %>
   <% end %>
-
-
-  <p><%= link_to "配送先一覧に戻る", public_addresses_path %></p>

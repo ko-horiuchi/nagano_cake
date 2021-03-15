@@ -23,6 +23,7 @@
             <%= item.name %>
             <% end %>
           </td>
+          <td><%= item.genre_id %></td>
           <td><%= item.price.to_s(:delimited)  %></td>
           <td><% if item.is_active == true %>
                 販売中
@@ -34,3 +35,5 @@
       <% end %>
     </tbody>
   </table>
+
+<%= paginate @items %>
