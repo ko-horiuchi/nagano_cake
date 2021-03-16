@@ -29,7 +29,11 @@
     <tbody>
       <tr>
         <td>商品合計</td>
-        <td><%=  %></td>
+        <td><% @order.order_details.each do |order_detail| %>
+            <%  total_price = [order_detail.amount * order_detail.item.price] %>
+            <%= total_price.sum %>
+            <% end %>
+        </td>
       </tr>
       <tr>
         <td>配送料</td>
@@ -55,15 +59,13 @@
 
     <tbody>
       <% total_price = 0 %>
+      <% @order.order_details.each do |order_detail| %>
         <tr>
-          <td><% @order.order_details.each do |order_detail| %>
-                <%= order_detail.item.name %><br>
-              <% end %>
-          </td>
-          <td><%= order.order_details.price %></td>
-          <td><%= order.postal_code %><%= order.address %><%= order.name %></td>
-          <td><%= order amount %></td>
-          <td><%= order.total_payment %></td>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.item.price %></td>
+          <td><%= order_detail.amount %></td>
+          <td><%= order_detail.amount * order_detail.item.price %></td>
         </tr>
+        <% end %>
     </tbody>
   </table>
