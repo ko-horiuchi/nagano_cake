@@ -1,25 +1,47 @@
 <%= render 'public/public_header' %>
 
-<h2>ログイン</h2>
-
-<h4>会員の方はこちらからログイン</h4>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :メールアドレス %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "sample@example.com"  %>
+<div class= "container">
+  <div class= "row">
+    <div class= "mx-auto col-lg-12 d-flex justify-content-start">
+      <div class= "h5 bg-light px-4 mt-4 mb-4" >ログイン</div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :パスワード %>
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class= "row">
+    <div class= "mx-auto col-lg-12 d-flex justify-content-start">
+      <div class= "h6 bg-light ml-5 mb-3" >会員の方はこちらからログイン</div>
+    </div>
   </div>
 
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
+  <div class= "row">
+    <div class= "mx-auto col-lg-10 d-flex justify-content-start">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td style="width:200px;">メールアドレス</td>
+              <td scope="col"><%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "sample@example.com",:size=>"50"  %></td>
+            </tr>
+            <tr>
+              <td scope="col">パスワード</td>
+              <td scope="col"><%= f.password_field :password, autocomplete: "current-password", :size=>"50" %></td>
+            </tr>
+              <td></td>
+              <td><%= f.submit 'ログイン', class: "btn btn-success" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
   </div>
-<% end %>
 
-<h4>会員登録がお済みでない方</h4>
-<p><%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。</p>
+  <div class= "row">
+    <div class= "mx-auto col-lg-12 d-flex justify-content-start">
+      <div class= "h5 bg-light px-4" >会員登録がお済みでない方</div>
+    </div>
+      <div class= "col-lg-10 d-flex justify-content-between">
+        <div><%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。 </div>
+      </div>
+  </div>
+</div>

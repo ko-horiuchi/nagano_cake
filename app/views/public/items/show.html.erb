@@ -1,17 +1,32 @@
 <%= render 'public/public_header' %>
 
-  <%= form_with model: @cart_item ,url: cart_items_path, local:true  do |f| %>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <table>
-    <tbody>
-      <tr>
-          <td><%= attachment_image_tag @item, :image, :fill, 300, 200, format: 'jpeg' %></td>
-          <td><strong><%= @item.name %></strong></td>
-          <td><%= @item.introduction %></td>
-          <td>¥<% price = @item.price * 1.1 %><%= price.round.to_s(:delimited) %><font size = "2">(税込)</font></td>
-          <td><%= f.select :amount, [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]], include_blank: "個数選択"  %></td>
-          <td><%= f.submit 'カートに入れる'%></td>
-      </tr>
-    </tbody>
-  </table>
-  <% end %>
+<div class= "container">
+  <div class= "row">
+    <div class="mt-5 ml-5">
+      <%= attachment_image_tag @item, :image, :fill, 250, 150, format: 'jpeg' %>
+    </div>
+
+    <div class="mt-3 ml-5" >
+      <table class="table table-borderless">
+        <%= form_with model: @cart_item ,url: cart_items_path, local:true  do |f| %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+          <tbody>
+            <tr>
+              <th scope="col"><div class="h1"><%= @item.name %></div></th>
+            </tr>
+            <tr>
+              <td scope="col"><%= @item.introduction %></td>
+            </tr>
+             <tr>
+              <td scope="col"><strong>¥<% price = @item.price * 1.1 %><%= price.round.to_s(:delimited) %></strong><font size = "2">(税込)</font></td>
+            </tr>
+            <tr>
+              <td scope="col"><%= f.select :amount, [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]], include_blank: "個数選択"  %></td>
+              <td scope="col"><%= f.submit 'カートに入れる', class: "btn btn-success"%></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+      </div>
+  </div>
+</div>

@@ -1,19 +1,46 @@
 <%= render 'admin/admin_header' %>
 
-<h3>商品新規登録</h3>
+<div class= "container">
+  <div class= "row">
+    <div class= "mx-auto col-lg-8 d-flex justify-content-start">
+      <div class= "h5 bg-light px-4" >商品新規登録</div>
+    </div>
+  </div>
 
-  <%= form_with model: @item, url: admin_items_path, local:true do |f| %>
-    <label for="image_id">商品画像</label>
-    <%= f.attachment_field :image %></br>
-    <label for="name">商品名</label>
-    <%= f.text_field :name,placeholder: "商品名" %></br>
-    <label for="introduction">商品説明</label>
-    <%= f.text_area :introduction,placeholder: "ここに説明文を記述します" %></br>
-    <label for="genre_id">ジャンル</label>
-    <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--" %>
-    <label for="price">税抜き価格</label>
-    <%= f.text_field :price %>円</br>
-    <label>販売ステータス</label>
-    <%= f.radio_button :is_active, true %>販売中<%= f.radio_button :is_active, false %>販売停止</br>
-    <%= f.submit '新規登録' %>
-  <% end %>
+  <div class= "row">
+    <div class= "col-lg-7 mx-auto">
+      <%= form_with model: @item, url: admin_items_path, local:true do |f| %>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td scope="col"><label for="image_id">商品画像</label></td>
+              <td scope="col"><%= f.attachment_field :image %></td>
+            </tr>
+            <tr>
+              <td scope="col"><label for="name">商品名</label></td>
+              <td scope="col"><%= f.text_field :name,placeholder: "商品名" %></td>
+            </tr>
+            <tr>
+              <td scope="col"><label for="introduction">商品説明</label></td>
+              <td scope="col"><%= f.text_area :introduction,placeholder: "ここに説明文を記述します" %></td>
+            </tr>
+            <tr>
+              <td scope="col"><label for="genre_id">ジャンル</label></td>
+              <td scope="col"><%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--" %></td>
+            </tr>
+            <tr>
+              <td scope="col"><label for="price">税抜き価格</label></td>
+              <td scope="col"><%= f.text_field :price %>円</td>
+            </tr>
+            <tr>
+              <td scope="col"><label>販売ステータス</label></td>
+              <td><%= f.radio_button :is_active, true %>販売中<%= f.radio_button :is_active, false %>販売停止中</br>
+                  <%= f.submit '新規登録', class: "btn btn-success btn-lg" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

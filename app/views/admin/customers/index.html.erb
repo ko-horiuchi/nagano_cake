@@ -1,35 +1,45 @@
 <%= render 'admin/admin_header' %>
 
-<h2>会員一覧</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>会員ID</th>
-        <th>氏名</th>
-        <th>メールアドレス</th>
-        <th>ステータス</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+<div class= "container">
+  <div class= "row">
+    <div class= "mx-auto col-lg-10 d-flex justify-content-start">
+      <div class= "h4 bg-light px-4 mt-4 mb-4" >会員一覧</div>
+    </div>
+  </div>
 
-    <tbody>
-      <% @customers.each do |customer| %>
-        <tr>
-          <td><%= customer.id %></td>
-          <td>
-            <%= link_to admin_customer_path(customer.id) do %>
-            <%= customer.last_name %><%= customer.first_name %>
-            <% end %>
-          </td>
-          <td><%= customer.email %></td>
-          <td><% if customer.is_active == true %>
-                有効
-                <% else %>
-                退会
-              <% end %></td>
-         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  
+  <div class= "row">
+    <div class= "col-lg-8 mx-auto">
+      <table class="table">
+        <thead class="bg-light">
+          <tr>
+            <th scope="col">会員ID</th>
+            <th scope="col">氏名</th>
+            <th scope="col">メールアドレス</th>
+            <th scope="col">ステータス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td><%= customer.id %></td>
+              <td>
+                <%= link_to admin_customer_path(customer.id) do %>
+                  <div class= 'text-dark'><%= customer.last_name %><%= customer.first_name %></div>
+                <% end %>
+              </td>
+              <td><%= customer.email %></td>
+              <td><% if customer.is_active == true %>
+                    <p class="text-success">有効</p>
+                  <% else %>
+                    <p class="text-muted">退会</p>
+                  <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
+
 <%= paginate @customers %>

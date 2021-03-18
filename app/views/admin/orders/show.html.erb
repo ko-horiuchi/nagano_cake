@@ -1,81 +1,94 @@
 <%= render 'admin/admin_header' %>
 
-<h3>注文履歴詳細</h3>
+<div class= "container">
+  <div class= "row">
+    <div class= "col-lg-6">
+      <div class="d-flex justify-content-start">
+        <div class= "h4 bg-light px-4" >注文履歴詳細</div>
+      </div>
 
-<table>
-  <tbody>
-    <tr>
-      <td>購入者</td>
-      <td><%= @order.name %></td>
-    </tr>
-    <tr>
-      <td>注文日</td>
-      <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
-    </tr>
-    <tr>
-      <td>配送先</td>
-      <td><%= @order.postal_code %><%= @order.address %><%= @order.name %></td>
-    </tr>
-    <tr>
-      <td>支払方法</td>
-      <td><%= @order.payment_method %></td>
-    </tr>
-    <tr>
-      <td>注文ステータス</td>
-      <td><%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
-            <%= f.select :status, Order.statuses.keys.to_a,{}  %>
-            <%= f.submit '更新' %>
-          <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-  <table>
-    <thead>
-      <tr>
-        <td>商品名</td>
-        <td>単価(税込)</td>
-        <td>数量</td>
-        <td>小計</td>
-        <td>制作ステータス</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% total_price1 = 0 %>
-      <% subtotal = 00 %>
-      <% @order.order_details.each do |order_detail| %>
-        <tr>
-          <td><%= order_detail.item.name %></td>
-          <td><% price = order_detail.item.price * 1.1 %><%= price.round.to_s(:delimited) %></td>
-          <td><%= order_detail.amount %></td>
-          <td><% subtotal = price * order_detail.amount %><%= subtotal.round.to_s(:delimited) %></td>
-          <td><%= form_with model: order_detail, url: admin_orders_detail_path(order_detail.id), method: :patch, local: true do |f| %>
-                <%= f.select :making_status, OrderDetail.making_statuses.keys.to_a,{}  %>
-                <%= f.submit '更新' %>
-              <% end %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <table>
-    <tbody>
-      <tr>
-        <td>商品合計</td>
-        <td><% @order.order_details.each do |order_detail| %>
-            <%  total_price = [order_detail.amount * order_detail.item.price] %>
-            <%= total_price.sum %>
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th scope="col">購入者</th>
+            <td scope="col"><%= @order.name %></td>
+          </tr>
+          <tr>
+            <th scope="col">注文日</th>
+            <td scope="col"><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+            <th scope="col"配送先></th>
+            <td scope="col"><%= @order.postal_code %><%= @order.address %><%= @order.name %></td>
+          </tr>
+          <tr>
+            <th scope="col">支払方法</th>
+            <td scope="col"><%= @order.payment_method %></td>
+          </tr>
+          <tr>
+            <th scope="col">注文ステータス</th>
+            <td scope="col"><%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
+                              <%= f.select :status, Order.statuses.keys.to_a,{}  %>
+                              <%= f.submit '更新', class: "btn btn-success btn-sm" %>
+                            <% end %>
+            </td>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class= "row">
+    <div class= "col-lg-8">
+      <table class="table">
+        <thead class="bg-light">
+          <tr>
+            <th scope="col">商品名</th>
+            <th scope="col">単価(税込)</th>
+            <th scope="col">数量</th>
+            <th scope="col">小計</th>
+            <th scope="col">制作ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% total_price1 = 0 %>
+          <% subtotal = 00 %>
+          <% @order.order_details.each do |order_detail| %>
+            <tr>
+              <td><%= order_detail.item.name %></td>
+              <td><% price = order_detail.item.price * 1.1 %><%= price.round.to_s(:delimited) %></td>
+              <td><%= order_detail.amount %></td>
+              <td><% subtotal = price * order_detail.amount %><%= subtotal.round.to_s(:delimited) %></td>
+              <td><%= form_with model: order_detail, url: admin_orders_detail_path(order_detail.id), method: :patch, local: true do |f| %>
+                    <%= f.select :making_status, OrderDetail.making_statuses.keys.to_a,{}  %>
+                    <%= f.submit '更新', class: "btn btn-success btn-sm" %>
+                  <% end %>
+              </td>
+            </tr>
             <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class= "col-lg-4">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th scope="col">商品合計</th>
+            <td scope="col"><% @order.order_details.each do |order_detail| %>
+                  <%  total_price = [order_detail.amount * order_detail.item.price] %>
+                  <%= total_price.sum %>円
+                <% end %>
         </td>
       </tr>
       <tr>
-        <td>送料</td>
-        <td><%= @order.shipping_cost %></td>
+        <th scope="col">送料</th>
+        <td scope="col"><%= @order.shipping_cost %>円</td>
       </tr>
       <tr>
-        <td>請求金額合計</td>
-        <td><%= @order.total_payment %></td>
+        <th scope="col">請求金額合計</th>
+        <th scope="col"><%= @order.total_payment %>円</th>
       </tr>
     </tbody>
   </table>
+  </div>
+  </div>

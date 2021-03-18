@@ -1,20 +1,52 @@
-<h3><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h3>
-  <%= form_with model:@customer, url:"/customers/#{@customer.id}", local:true do |f| %>
-    <h6>会員ID</h6>
-      <%= @customer.id %>
-    <h6>氏名</h6>
-      <%= f.text_field :last_name %><%= f.text_field :first_name %>
-    <h6>フリガナ</h6>
-      <%= f.text_field :last_name_kana %><%= f.text_field :first_name_kana %>
-    <h6>郵便番号</h6>
-      <%= f.text_field :postal_code %>
-    <h6>住所</h6>
-      <%= f.text_field :address %>
-    <h6>電話番号</h6>
-      <%= f.text_field :telephone_number %>
-    <h6>メールアドレス</h6>
-      <%= f.text_field :email %>
-    <h6>会員ステータス</h6>
-      <%= f.radio_button :is_active, true %>有効<%= f.radio_button :is_active, false %>退会</br>
-    <%= f.submit '変更を保存' %>
+<%= render 'admin/admin_header' %>
+
+<div class= "container">
+  <div class= "row">
+    <div class= "mx-auto col-lg-12 d-flex justify-content-start">
+      <div class= "h5 bg-light px-4" ><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</div>
+    </div>
+  </div>
+
+  <%= form_with model:@customer, url: admin_customer_path, local:true do |f| %>
+  <table class="table table-borderless">
+    <tbody>
+      <tr>
+        <td style="width:200px;">会員ID</td>
+        <td scope="col"><%= @customer.id %></td>
+      </tr>
+      <tr>
+        <td scope="col">氏名</td>
+        <td scope="col"><%= f.text_field :last_name, class: "mr-5" %><%= f.text_field :first_name %></td>
+      </tr>
+       <tr>
+        <td scope="col">フリガナ</td>
+        <td scope="col"><%= f.text_field :last_name_kana, class: "mr-5" %><%= f.text_field :first_name_kana %></td>
+      </tr>
+      <tr>
+        <td scope="col">郵便番号</td>
+        <td scope="col"><%= f.text_field :postal_code %></td>
+      </tr>
+       <tr>
+        <td scope="col">住所</td>
+        <td scope="col"><%= f.text_field :address, :size=>"50" %></td>
+      </tr>
+       <tr>
+        <td scope="col">電話番号</td>
+        <td scope="col"><%= f.text_field :telephone_number %></td>
+      </tr>
+       <tr>
+        <td scope="col">メールアドレス</td>
+        <td scope="col"><%= f.text_field :email %></td>
+      </tr>
+      <tr>
+        <td scope="col">会員ステータス</td>
+        <td scope="col"><%= f.radio_button :is_active, true, class: "mr-1" %><span class= "mr-3">有効</span><%= f.radio_button :is_active, false, class: "mr-1" %>退会</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit '変更を保存', class: "btn btn-success  btn-lg" %></td>
+      </tr>
+    </tbody>
+  </table>
   <% end %>
+</div>
