@@ -37,7 +37,7 @@
       </table>
     </div>
   </div>
-  
+
   <div class= "row">
     <div class= "col-lg-8">
       <table class="table">
@@ -74,10 +74,12 @@
         <tbody>
           <tr>
             <th scope="col">商品合計</th>
-            <td scope="col"><% @order.order_details.each do |order_detail| %>
-                  <%  total_price = [order_detail.amount * order_detail.item.price] %>
-                  <%= total_price.sum %>円
-                <% end %>
+            <td scope="col">
+              <% @sum = 0 %>
+            <% @order.order_details.each do |order_detail| %>
+              <% @sum += (order_detail.item.price) * order_detail.amount %>
+            <% end %>
+            <%= @sum.round.to_s(:delimited) %>円
         </td>
       </tr>
       <tr>
@@ -86,7 +88,7 @@
       </tr>
       <tr>
         <th scope="col">請求金額合計</th>
-        <th scope="col"><%= @order.total_payment %>円</th>
+        <th scope="col"><%= @order.total_payment.round.to_s(:delimited) %>円</th>
       </tr>
     </tbody>
   </table>

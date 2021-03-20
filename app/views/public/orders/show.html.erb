@@ -35,10 +35,12 @@
       <table class= "table table-bordered">
         <tr>
           <td class= "bg-light">商品合計</td>
-          <td><% @order.order_details.each do |order_detail| %>
-                  <%  total_price = [order_detail.amount * order_detail.item.price] %>
-                  <%= total_price.sum %>円
-                <% end %></td>
+          <td><% @sum = 0 %>
+            <% @order.order_details.each do |order_detail| %>
+              <% @sum += (order_detail.item.price) * order_detail.amount %>
+            <% end %>
+            <%= @sum.round.to_s(:delimited) %>
+          </td>
         </tr>
         <tr>
           <td class= "bg-light">配送料</td>
@@ -46,7 +48,7 @@
         </tr>
         <tr>
           <th class= "bg-light">ご請求額</td>
-          <td><%= @order.total_payment %></td>
+          <td><%= @order.total_payment.round.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
@@ -69,9 +71,9 @@
           <% @order.order_details.each do |order_detail| %>
           <tr>
             <td colspan="3"><%= order_detail.item.name %></td>
-            <td scope="col"><%= order_detail.item.price %></td>
+            <td scope="col"><%= order_detail.item.price.round.to_s(:delimited) %></td>
             <td scope="col"><%= order_detail.amount %></td>
-            <td scope="col"><%= order_detail.amount * order_detail.item.price %></td>
+            <td scope="col"><% subtotal = order_detail.amount * order_detail.item.price %><%= subtotal.round.to_s(:delimited) %></td>
           </tr>
           <% end %>
         </tbody>

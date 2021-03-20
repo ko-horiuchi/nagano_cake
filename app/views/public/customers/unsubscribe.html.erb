@@ -17,12 +17,12 @@
     退会する場合は、「退会する」をクリックしてください。</p></div>
     </div>
   </div>
-  
+
   <div class= "row">
     <div class= "col-lg-12 mt-5">
       <div class="d-flex justify-content-center">
         <%= link_to '退会しない', customers_my_page_path(@customer), class: "btn btn-primary  mr-3" %>
-        <%= link_to "退会する", customers_withdraw_path(@customer), method: :patch, class: "btn btn-danger" %>
+        <%= link_to "退会する", customers_withdraw_path(@customer), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
       </div>
     </div>
   </div>

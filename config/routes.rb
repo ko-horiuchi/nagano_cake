@@ -38,3 +38,4 @@ Rails.application.routes.draw do
    post 'orders/confirm' => 'orders#confirm', as: 'orders/confirm'
   end
  end
+ 

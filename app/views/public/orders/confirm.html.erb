@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-      
+
   <div class= "row">
     <div class= "col-lg-8">
       <table class= "table table-bordered">
@@ -22,8 +22,7 @@
         </thead>
 
         <tbody>
-          <% total_price1 = 0 %>
-          <% subtotal = 00 %>
+          <% subtotal = 0 %>
           <% @cart_items.each do |cart_item| %>
             <tr>
               <td scope="col"><%= attachment_image_tag cart_item.item, :image, :fill, 120, 80, format: 'jpeg' %><%= cart_item.item.name %></td>
@@ -35,22 +34,28 @@
         </tbody>
       </table>
     </div>
-    
+
     <div class= "col-lg-4">
       <table class= "table table-bordered">
         <tr>
           <td class= "bg-light">送料</td><td><%= @order.shipping_cost %></td>
         </tr>
         <tr>
-          <td class= "bg-light">商品合計</td><td><% total_price2 = total_price1 += subtotal %><%= total_price2.round.to_s(:delimited) %> </td>
+          <td class= "bg-light">商品合計</td>
+          <td><% @sum = 0 %>
+            <% @cart_items.each do |cart_item| %>
+              <% @sum += (cart_item.item.price) * cart_item.amount %>
+            <% end %>
+            <%= @sum %>
+          </td>
         </tr>
         <tr>
-          <td class= "bg-light">請求金額</td><td><% @order.total_payment = total_price2 + @order.shipping_cost %><%= @order.total_payment.round.to_s(:delimited) %></td>
+          <td class= "bg-light">請求金額</td><td><% @order.total_payment = @sum * 1.1 + @order.shipping_cost %><%= @order.total_payment.round.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
   </div>
-  
+
   <div class= "row">
     <div class= "col-lg-12">
       <div class= "mt-3 mb-3">
@@ -61,7 +66,7 @@
       </div>
     </div>
   </div>
-    
+
   <div class= "row">
     <div class="ml-5 mt-2">
       <%= link_to '注文を確定する', orders_complete_path, class: "btn btn-success btn-sm" %>

@@ -67,7 +67,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   private
     def after_sign_up_path_for(resource)
-      items_path
+      customers_my_page_path(current_customer.id)
     end
 end
 
